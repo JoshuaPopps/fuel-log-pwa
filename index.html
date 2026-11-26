@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="1990">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fuel Log</title>
+<meta name="description" content="A fuel logbook for motorcycles. Log every fill-up, see real MPG per bike — miles divided by gallons, nothing invented — and what each mile actually costs. Works offline, data stays on your device.">
+<meta name="theme-color" content="#070709">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <p class="eyebrow">shop log &mdash; popps&rsquo;s garage</p>
+  <h1>Fuel Log</h1>
+  <p class="tagline">Every fill-up, every mile, every dollar — and the MPG to prove it.</p>
+</header>
+
+<main>
+  <!-- LOG -->
+  <section id="view-log" class="view active">
+    <label>Bike
+      <select id="log-bike"></select>
+    </label>
+    <div id="fillup-list"></div>
+
+    <h2>Log a fill-up</h2>
+    <form id="fillup-form" class="card">
+      <div class="grid">
+        <label>Bike<select id="f-bike" required></select></label>
+        <label>Date<input type="date" id="f-date" required></label>
+        <label>Odometer (mi)<input type="number" id="f-odometer" inputmode="numeric" min="0" step="1" required placeholder="e.g. 42300"></label>
+        <label>Gallons<input type="number" id="f-gallons" inputmode="decimal" min="0" step="0.001" required placeholder="e.g. 4.3"></label>
+        <label>Price per gallon ($)<input type="number" id="f-price" inputmode="decimal" min="0" step="0.01" required placeholder="e.g. 3.89"></label>
+        <label>Station (optional)<input type="text" id="f-station" placeholder="e.g. QT — 51st Ave"></label>
+      </div>
+      <label class="check"><input type="checkbox" id="f-partial"> Partial fill — not a full tank</label>
+      <p class="muted">A partial fill still counts in gallons and cost, but it has no MPG — and neither does the fill-up after it. MPG needs two consecutive full tanks.</p>
+      <label>Notes<textarea id="f-notes" rows="2" placeholder="e.g. ethanol-free, high test"></textarea></label>
+      <button type="submit" class="primary">Log fill-up</button>
+    </form>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="view-summary" class="view">
+    <h2>Summary</h2>
+    <p class="muted">MPG = miles since the previous fill-up ÷ gallons at this fill-up. The running average uses full-to-full segments only — never an average of rounded per-fill-up figures. Cost per mile is total cost ÷ total miles.</p>
+    <label>Bike
+      <select id="summary-bike"></select>
+    </label>
+    <div id="summary-cards"></div>
+  </section>
+
+  <!-- BIKES -->
+  <section id="view-bikes" class="view">
+    <h2>Bikes</h2>
+    <p class="muted">Bikes live in the shared Pocket Garage roster — the same b1/b2/b3 list the other apps use. Add a bike here and it is added to that roster for every app. There is no delete-bike here: roster management belongs to the landing dashboard, so a mistyped bike is removed there, not here.</p>
+    <div id="bikes-list"></div>
+
+    <h3>Add a bike</h3>
+    <form id="bike-form" class="card">
+      <div class="grid">
+        <label>Name<input type="text" id="bike-name" required placeholder="e.g. 1995 Fat Boy"></label>
+        <label>Year<input type="text" id="bike-year" inputmode="numeric" placeholder="1995"></label>
+        <label>Model<input type="text" id="bike-model" placeholder="Fat Boy"></label>
+      </div>
+      <label>Notes<textarea id="bike-notes" rows="2"></textarea></label>
+      <button type="submit" class="primary">Add bike</button>
+    </form>
+  </section>
+
+  <!-- DATA -->
+  <section id="view-data" class="view">
+    <h2>Your data</h2>
+    <p class="muted">No account, no server, no sync. Your fill-ups live in this browser's local storage. Back them up with Export — one JSON file.</p>
+    <p id="data-counts" class="card"></p>
+    <div class="card">
+      <h3>Export</h3>
+      <p class="muted">The backup is the whole fuel log — every bike, every fill-up. The per-bike export below is one bike's fill-ups, as JSON or readable plain text.</p>
+      <button id="export-btn" class="primary">Download JSON backup</button>
+      <button id="copy-export-btn" class="secondary">Copy JSON to clipboard</button>
+    </div>
+    <div class="card">
+      <h3>Export one bike</h3>
+      <label>Bike<select id="export-bike"></select></label>
+      <button id="export-json-btn" class="primary">Download JSON (this bike)</button>
+      <button id="export-text-btn" class="secondary">Download text (this bike)</button>
+      <button id="copy-text-btn" class="secondary">Copy text</button>
+    </div>
+    <div class="card">
+      <h3>Import</h3>
+      <p class="muted">Import replaces the current fuel log. Export first if you want to keep it. Fill-ups pointing at a bike the shared roster doesn't have yet still load — they show under their roster key until that bike is added.</p>
+      <label>From file<input type="file" id="import-file" accept=".json,application/json"></label>
+      <label>Or paste JSON<textarea id="import-text" rows="4"></textarea></label>
+      <button id="import-btn" class="primary">Import fuel log</button>
+    </div>
+    <div class="card">
+      <h3>Try it out</h3>
+      <p class="muted">Loads example fill-ups on the 1995 Fat Boy so you can see MPG, the running average, and what a partial fill does to the chain — before entering your own numbers. The example prices are example prices only.</p>
+      <button id="sample-btn" class="secondary">Load example data</button>
+      <button id="clear-btn" class="danger">Delete all fill-ups</button>
+      <p class="muted">Delete clears this app's fill-ups only. The shared bike roster is not touched.</p>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav" aria-label="Sections">
+  <button class="navbtn active" data-view="log">Log</button>
+  <button class="navbtn" data-view="summary">Summary</button>
+  <button class="navbtn" data-view="bikes">Bikes</button>
+  <button class="navbtn" data-view="data">Data</button>
+</nav>
+
+<div id="toast" class="toast" role="status"></div>
+<script src="sw-update.js"></script>
+<script src="bike-profile.js"></script>
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () { /* offline use is optional */ });
+    });
+  }
+</script>
+</body>
+</html>
