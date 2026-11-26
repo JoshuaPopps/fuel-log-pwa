@@ -1,0 +1,53 @@
+<!-- Fuel Log hero — hand-drawn, word-free. A vintage fuel pump,
+     blueprint-sketch style: chrome linework on gloss black, purple
+     needle and pinstripe. Drawn for the app; no stock art, no text. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 240" role="img" aria-label="Vintage fuel pump line drawing">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#e3e3ea"/>
+      <stop offset="48%" stop-color="#a8a8b2"/>
+      <stop offset="60%" stop-color="#f4f4f8"/>
+      <stop offset="78%" stop-color="#c6c6cf"/>
+      <stop offset="100%" stop-color="#8e8e99"/>
+    </linearGradient>
+  </defs>
+  <!-- blueprint construction lines -->
+  <line x1="430" y1="18" x2="430" y2="228" stroke="#9d6bff" stroke-width="1" stroke-dasharray="3 6" opacity=".35"/>
+  <circle cx="430" cy="98" r="48" fill="none" stroke="url(#chrome)" stroke-width="1" stroke-dasharray="3 6" opacity=".35"/>
+  <!-- ground line with a purple segment under the pump -->
+  <line x1="60" y1="218" x2="800" y2="218" stroke="url(#chrome)" stroke-width="2"/>
+  <line x1="330" y1="218" x2="530" y2="218" stroke="#9d6bff" stroke-width="2"/>
+  <!-- pump body: dome top, straight sides -->
+  <path d="M330 205 L330 80 Q330 30 430 30 Q530 30 530 80 L530 205 Z"
+        fill="#101014" stroke="url(#chrome)" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- base plinth -->
+  <rect x="315" y="205" width="230" height="12" rx="2" fill="none" stroke="url(#chrome)" stroke-width="3"/>
+  <!-- gauge face -->
+  <circle cx="430" cy="98" r="34" fill="#070709" stroke="url(#chrome)" stroke-width="3"/>
+  <g stroke="url(#chrome)" stroke-width="2" stroke-linecap="round">
+    <line x1="456" y1="98" x2="463" y2="98"/>
+    <line x1="453" y1="111" x2="459" y2="115"/>
+    <line x1="443" y1="121" x2="447" y2="127"/>
+    <line x1="430" y1="124" x2="430" y2="131"/>
+    <line x1="417" y1="121" x2="414" y2="127"/>
+    <line x1="408" y1="111" x2="401" y2="115"/>
+    <line x1="404" y1="98" x2="397" y2="98"/>
+    <line x1="408" y1="85" x2="401" y2="82"/>
+    <line x1="417" y1="76" x2="414" y2="69"/>
+    <line x1="430" y1="72" x2="430" y2="65"/>
+    <line x1="443" y1="76" x2="447" y2="69"/>
+    <line x1="453" y1="85" x2="459" y2="82"/>
+  </g>
+  <!-- gauge needle (purple) + hub -->
+  <line x1="430" y1="98" x2="412" y2="76" stroke="#9d6bff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="430" cy="98" r="5" fill="#9d6bff"/>
+  <!-- pump door -->
+  <rect x="395" y="138" width="70" height="40" rx="2" fill="none" stroke="url(#chrome)" stroke-width="2.5"/>
+  <line x1="395" y1="158" x2="465" y2="158" stroke="url(#chrome)" stroke-width="1.5" opacity=".6"/>
+  <!-- hose out the right side, looping down to the nozzle -->
+  <path d="M530 145 C600 145 625 172 612 198" fill="none" stroke="url(#chrome)" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="530" cy="145" r="4" fill="none" stroke="url(#chrome)" stroke-width="2.5"/>
+  <line x1="612" y1="198" x2="630" y2="176" stroke="url(#chrome)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="619" y1="190" x2="632" y2="196" stroke="url(#chrome)" stroke-width="3" stroke-linecap="round"/>
+</svg>

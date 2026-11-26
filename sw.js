@@ -1,10 +1,11 @@
 /* Fuel Log service worker — app-shell cache so the logbook
  * works offline in the garage. Version the cache name on release. */
-var CACHE = 'fuel-log-v1';
+var CACHE = 'fuel-log-v2';
 var ASSETS = [
   './', './index.html', './styles.css', './app.js',
   './sw-update.js', './bike-profile.js',
   './manifest.webmanifest',
+  './assets/hero-fuel-log.svg',
   './icons/icon-192.png', './icons/icon-512.png'
 ];
 
